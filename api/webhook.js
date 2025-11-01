@@ -33,10 +33,6 @@ module.exports = async (req, res) => {
 
     const metadata = paymentIntent.metadata;
     
-    const startDate = new Date();
-    const endDate = new Date(startDate);
-    endDate.setDate(endDate.getDate() + 3);
-
     const ghlPayload = {
       firstName: metadata.businessName || 'Business Owner',
       phone: metadata.phone,
@@ -76,7 +72,7 @@ module.exports = async (req, res) => {
     }
   }
 
-  res.json({ received: true });
+  res.status(200).json({ received: true });
 };
 
 export const config = {
@@ -84,17 +80,3 @@ export const config = {
     bodyParser: false,
   },
 };
-```
-
-5. Click **"Commit new file"**
-
-### Step 3: Update Stripe Webhook URL
-Now we need to tell Stripe to send events to this new endpoint.
-
-1. Go to: **https://dashboard.stripe.com/webhooks** (make sure you're in **LIVE mode**)
-2. Find your existing webhook
-3. Click on it
-4. Click **"..."** or **"Update details"**
-5. Change the Endpoint URL to:
-```
-   https://localhire-backend-wab4.vercel.app/api/webhook

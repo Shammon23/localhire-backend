@@ -43,6 +43,7 @@ module.exports = async (req, res) => {
       postcode: metadata.postcode,
       
       budget: metadata.budget,
+      dailyBudget: Math.floor((metadata.budget * 100) / 9),
       campaignStatus: 'pending',
       
       stripePaymentId: paymentIntent.id,
